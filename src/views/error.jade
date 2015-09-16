@@ -1,0 +1,45 @@
+doctype html
+html
+  head
+    title!= title
+    style.
+      body {
+        font-family: Monaco, "Courier New", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", monospace;
+        padding: 1vh;
+        font-size: 13px;
+        background-color: #212121;
+      }
+      pre {
+        background-color: #424242;
+        font-size: 12px;
+        color: #eeeeee;
+        padding: 1em 0px 1em 1em;
+        /* border-radius */
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        /* box-shadow */
+        -webkit-box-shadow: rgba(0,0,0,0.2) 0px 1px 3px;
+        -moz-box-shadow: rgba(0,0,0,0.2) 0px 1px 3px;
+        box-shadow: rgba(0,0,0,0.2) 0px 1px 3px;
+        max-height: 90vh;
+        overflow:scroll;
+        overflow-x:hidden;
+      }
+      
+      div {
+        background-color: #4C3D00;
+        font-size: 12px;
+        color: #eeeeee;
+        padding: 1em 0px 1em 1em;
+        /* border-radius */
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        /* box-shadow */
+        -webkit-box-shadow: rgba(0,0,0,0.2) 0px 1px 3px;
+        -moz-box-shadow: rgba(0,0,0,0.2) 0px 1px 3px;
+        box-shadow: rgba(0,0,0,0.2) 0px 1px 3px;
+      }
+  body
+    div!= error

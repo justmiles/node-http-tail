@@ -1,0 +1,61 @@
+doctype html
+html
+  head
+    title!= title
+    style.
+      body {
+        font-family: 'Lucida Grande', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        padding: 1vh;
+        font-size: 13px;
+        background-color: #212121;
+      }
+      pre {
+        background-color: #424242;
+        font-family: Monaco, "Courier New", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", monospace;
+        font-size: 12px;
+        color: #eeeeee;
+        padding: 1em 0px 1em 1em;
+        /* border-radius */
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        /* box-shadow */
+        -webkit-box-shadow: rgba(0,0,0,0.2) 0px 1px 3px;
+        -moz-box-shadow: rgba(0,0,0,0.2) 0px 1px 3px;
+        box-shadow: rgba(0,0,0,0.2) 0px 1px 3px;
+        max-height: 90vh;
+        overflow:scroll;
+        overflow-x:hidden;
+      }
+      
+    script(src='/socket.io-1.2.0.js')
+    script.
+      var file ='!{file}';
+      var filepath ='!{filepath}';
+      
+    script
+     :coffee-script
+      socket = io()
+      
+      addMessage = (message) ->
+         text = document.createTextNode(message)
+         br = document.createElement('br')
+         messages = document.getElementById('messages')
+         messages.appendChild text
+
+      overwriteMessage = (message) ->
+         messages = document.getElementById('messages')
+         messages.innerHTML = message
+		
+      socket.on file, (data) ->
+         messages = document.getElementById('messages')
+         scrollPercentage = messages.scrollTop / messages.scrollHeight
+         
+         addMessage data + '\n'
+         if scrollPercentage > .8 or scrollPercentage == 0
+           messages.scrollTop = messages.scrollHeight
+
+         socket.on 'error', console.error.bind(console)
+         
+  body
+    pre#messages
